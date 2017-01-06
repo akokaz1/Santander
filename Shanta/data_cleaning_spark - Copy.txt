@@ -1,0 +1,22 @@
+load = sc.textFile('file:///home/training/PycharmProjects/santander/train_ver2.csv')
+
+# not used
+feature_response = load.map(lambda x: x.split(',')).map(lambda x: (x[24],x[25],x[26],x[27],x[28],x[29],x[30],x[31],x[32],x[33],x[34],x[35],x[36],x[37],x[38],x[39],x[40],x[41],x[42],x[43],x[44],x[45],x[46],x[47], x[23].split(' ')[0]))
+
+features = load.map(lambda x: x.split(',')).map(lambda x: (x[24],x[25],x[26],x[27],x[28],x[29],x[30],x[31],x[32],x[33],x[34],x[35],x[36],x[37],x[38],x[39],x[40],x[41],x[42],x[43],x[44],x[45],x[46],x[47]))
+
+response = load.map(lambda x: x.split(',')).map(lambda x: x[23].split(' ')[0])
+
+# not used
+customer_response = load.map(lambda x: x.split(',')).map(lambda x: x[1], x[23].split(' ')[0])
+
+customer_response = load.map(lambda x: x.split(',')).map(lambda x: x[1])
+
+response = load.map(lambda x: x.split(',')).map(lambda x: x[23].split(' ')[0])
+
+feature_response.repartition(1).saveAsTextFile("/feature_response.csv")
+
+
+customer_feature.repartition(1).saveAsTextFile("/customer_feature.csv")
+
+
